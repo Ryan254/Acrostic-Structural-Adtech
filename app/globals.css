@@ -54,8 +54,14 @@ button { cursor: pointer; }
 .receipt-detail-grid div { display: grid; gap: 5px; }
 .receipt-detail-grid span { color: #7b8882; font-size: 11px; }
 .receipt-detail-grid strong { overflow-wrap: anywhere; color: #203f43; font-size: 13px; }
-.receipt-total { display: flex; justify-content: space-between; padding: 16px 0; border-top: 1px solid #e7ebe6; border-bottom: 1px solid #e7ebe6; color: #12343b; }
-.receipt-total strong { font-size: 20px; }
+.receipt-total { display: flex; justify-content: space-between; padding: 12px 0; border-top: 1px solid #e7ebe6; border-bottom: 1px solid #e7ebe6; color: #12343b; }
+.receipt-total > div { display: grid; gap: 5px; }
+.receipt-total > div:last-child { text-align: right; }
+.receipt-total span { color: #7b8882; font-size: 11px; }
+.receipt-total b { padding-top: 3px; font-size: 13px; }
+.receipt-total strong { font-size: 18px; }
+.receipt-advert-mark { animation: receipt-letter-pulse 2.8s ease-in-out infinite; box-shadow: 0 0 0 0 color-mix(in srgb, #003087 25%, transparent); }
+@keyframes receipt-letter-pulse { 0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 color-mix(in srgb, #003087 22%, transparent); } 50% { transform: scale(1.08); box-shadow: 0 0 0 8px transparent; } }
 .receipt-advert { display: flex; gap: 16px; margin-top: 22px; padding: 20px; border-radius: 14px; background: #f5f8f3; }
 .receipt-advert-mark { display: grid; width: 44px; height: 44px; flex: 0 0 44px; place-items: center; border-radius: 10px; color: #fff; font-size: 22px; font-weight: 800; }
 .receipt-advert h3 { margin: 5px 0 3px; color: #12343b; font-size: 17px; }

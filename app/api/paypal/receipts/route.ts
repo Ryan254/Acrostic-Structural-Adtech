@@ -16,6 +16,8 @@ export async function GET() {
       brandName: paypalReceipt.brandName,
       keyword: paypalReceipt.keyword,
       amount: paypalReceipt.amount,
+      subtotal: paypalReceipt.subtotal,
+      tax: paypalReceipt.tax,
       currency: paypalReceipt.currency,
       status: paypalReceipt.status,
       payerEmail: paypalReceipt.payerEmail,

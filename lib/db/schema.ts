@@ -54,6 +54,8 @@ export const paypalReceipt = pgTable('paypal_receipt', {
   brandName: text('brandName').notNull(),
   keyword: text('keyword').notNull(),
   amount: text('amount').notNull(),
+  subtotal: text('subtotal'),
+  tax: text('tax'),
   currency: text('currency').notNull().default('USD'),
   status: text('status').notNull().default('COMPLETED'),
   payerEmail: text('payerEmail'),

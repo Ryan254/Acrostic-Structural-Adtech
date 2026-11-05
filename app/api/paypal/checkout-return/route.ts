@@ -45,6 +45,8 @@ export async function GET(request: Request) {
       brandName,
       keyword,
       amount: capture?.amount?.value ?? purchaseUnit?.amount?.value ?? '0.00',
+      subtotal: purchaseUnit?.amount?.breakdown?.item_total?.value ?? null,
+      tax: purchaseUnit?.amount?.breakdown?.tax_total?.value ?? null,
       currency: capture?.amount?.currency_code ?? purchaseUnit?.amount?.currency_code ?? 'USD',
       status: 'COMPLETED',
       payerEmail: data.payer?.email_address ?? null,
