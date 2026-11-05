@@ -53,6 +53,6 @@ export async function GET(request: Request) {
   const destination = new URL('/?paypal=paid', request.url)
   destination.searchParams.set('brand', brandName)
   destination.searchParams.set('keyword', keyword)
-  destination.searchParams.set('view', params.get('view') || 'publisher')
+  destination.searchParams.set('view', 'inbox')
   return NextResponse.redirect(destination)
 }
