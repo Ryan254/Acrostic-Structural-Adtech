@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server'
 import { eq } from 'drizzle-orm'
 import { auth } from '@/lib/auth'
 import { db } from '@/lib/db'
-import { paidAdvert } from '@/lib/db/schema'
+import { paidAdvert, paypalReceipt } from '@/lib/db/schema'
 import { getPayPalToken } from '@/lib/paypal'
 import { headers } from 'next/headers'
 
@@ -34,6 +34,21 @@ export async function GET(request: Request) {
   const existing = await db.select({ id: paidAdvert.id }).from(paidAdvert).where(eq(paidAdvert.paypalOrderId, orderId)).limit(1)
   if (existing.length === 0) {
     await db.insert(paidAdvert).values({ id: crypto.randomUUID(), userId: session.user.id, brandName, keyword, paypalOrderId: orderId, status: 'paid' })
+  }
+  const receiptExisting = await db.select({ id: paypalReceipt.id }).from(paypalReceipt).where(eq(paypalReceipt.paypalOrderId, orderId)).limit(1)
+  if (receiptExisting.length === 0) {
+    const capture = purchaseUnit?.payments?.captures?.[0]
+    await db.insert(paypalReceipt).values({
+      id: crypto.randomUUID(),
+      userId: session.user.id,
+      paypalOrderId: orderId,
+      brandName,
+      keyword,
+      amount: capture?.amount?.value ?? purchaseUnit?.amount?.value ?? '0.00',
+      currency: capture?.amount?.currency_code ?? purchaseUnit?.amount?.currency_code ?? 'USD',
+      status: 'COMPLETED',
+      payerEmail: data.payer?.email_address ?? null,
+    })
   }
   const destination = new URL('/?paypal=paid', request.url)
   destination.searchParams.set('brand', brandName)

@@ -34,6 +34,25 @@ button { cursor: pointer; }
   .chat-acrostic .acrostic-line > span:last-child { overflow-wrap: anywhere; }
   .message-bubble { min-width: 0; }.chat-acrostic { overflow-x: auto; overflow-y: hidden; scrollbar-width: thin; }.chat-acrostic .acrostic-line { display: flex; flex-wrap: nowrap; align-items: center; gap: 2px; white-space: nowrap; overflow: visible; width: max-content; min-width: 100%; }
 .publisher-continuation-intro { margin-top: 28px; }
+.receipt-inbox { margin-top: 16px; padding: 18px; border: 1px solid #d9e0da; border-radius: 16px; background: linear-gradient(145deg, #fffdf7, #f4f7f1); box-shadow: 0 10px 24px rgba(24, 46, 48, .08); }
+.receipt-inbox-heading { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; margin-bottom: 14px; }
+.receipt-inbox-heading h3 { margin: 4px 0 0; font-size: 18px; letter-spacing: -.02em; }
+.inbox-count { display: inline-flex; min-width: 24px; height: 24px; align-items: center; justify-content: center; border-radius: 999px; background: #12343b; color: #fff8e9; font-size: 12px; font-weight: 700; }
+.receipt-empty { margin: 0; color: #6a7774; font-size: 12px; line-height: 1.5; }
+.receipt-card { padding: 12px; border: 1px solid #e0e5df; border-radius: 12px; background: rgba(255,255,255,.72); }
+.receipt-card + .receipt-card { margin-top: 10px; }
+.receipt-card-top { display: flex; align-items: center; gap: 9px; }
+.receipt-check { display: grid; width: 24px; height: 24px; place-items: center; border-radius: 50%; background: #d8efe2; color: #167044; }
+.receipt-check svg { width: 14px; height: 14px; }
+.receipt-card-top div { display: grid; gap: 2px; min-width: 0; flex: 1; }
+.receipt-card-top div span, .receipt-card-meta { color: #74807d; font-size: 10px; }
+.receipt-card-top strong { color: #12343b; font-size: 13px; }
+.receipt-card-meta { display: flex; flex-wrap: wrap; gap: 6px 10px; margin: 10px 0; }
+.receipt-offer { display: flex; align-items: center; gap: 9px; padding-top: 10px; border-top: 1px solid #e5e8e2; }
+.receipt-offer-letter { display: grid; width: 30px; height: 30px; flex: 0 0 30px; place-items: center; border-radius: 6px; background: #003087; color: #fff; font-size: 16px; font-weight: 800; }
+.receipt-offer div { display: grid; gap: 2px; min-width: 0; }
+.receipt-offer b { color: #12343b; letter-spacing: .08em; font-size: 13px; }
+.receipt-offer p { margin: 0; color: #65736f; font-size: 10px; }
 .paragraph-acrostic-block { margin-top: 20px; display: grid; gap: 4px; }
 .paragraph-acrostic-block p { display: flex; align-items: flex-start; gap: 10px; margin: 0; line-height: 1.55; }
 .paragraph-acrostic-letter { flex: 0 0 58px; width: 58px; height: 58px; display: inline-flex; align-items: center; justify-content: center; border-radius: 6px; background: color-mix(in srgb, var(--tile-color) 84%, #12343b); color: #f4d69a; font: 700 42px/.9 Georgia, 'Times New Roman', serif; box-shadow: 0 4px 12px rgba(24, 46, 48, .18); }.chat-acrostic .acrostic-line > span:last-child { min-width: max-content; }

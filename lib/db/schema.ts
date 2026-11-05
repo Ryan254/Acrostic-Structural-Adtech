@@ -47,6 +47,19 @@ export const paidAdvert = pgTable('paid_advert', {
   createdAt: timestamp('createdAt').notNull().defaultNow(),
 })
 
+export const paypalReceipt = pgTable('paypal_receipt', {
+  id: text('id').primaryKey(),
+  userId: text('userId').notNull(),
+  paypalOrderId: text('paypalOrderId').notNull().unique(),
+  brandName: text('brandName').notNull(),
+  keyword: text('keyword').notNull(),
+  amount: text('amount').notNull(),
+  currency: text('currency').notNull().default('USD'),
+  status: text('status').notNull().default('COMPLETED'),
+  payerEmail: text('payerEmail'),
+  createdAt: timestamp('createdAt').notNull().defaultNow(),
+})
+
 export const verification = pgTable('verification', {
   id: text('id').primaryKey(),
   identifier: text('identifier').notNull(),
