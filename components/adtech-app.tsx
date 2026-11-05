@@ -12,6 +12,7 @@ import {
   CreditCard,
   FileText,
   LayoutDashboard,
+  Mail,
   Menu,
   MessageSquare,
   Plus,
@@ -27,11 +28,12 @@ import { Button } from '@/components/ui/button'
 import { signOut } from '@/lib/auth-client'
 
 type Brand = { name: string; keyword: string; color: string; description: string; price: string }
-type View = 'publisher' | 'chat' | 'campaigns' | 'about'
+type View = 'publisher' | 'chat' | 'campaigns' | 'about' | 'inbox'
 
 const priceForKeyword = (keyword: string) => `$${keyword.replace(/[^A-Za-z]/g, '').length * 100}.00`
 const fetcher = (url: string) => fetch(url, { cache: 'no-store' }).then((response) => response.json())
 type ChatMessage = { role: 'user' | 'assistant'; text: string; lines?: string[] }
+type Receipt = { id: string; paypalOrderId: string; brandName: string; keyword: string; amount: string; subtotal: string | null; tax: string | null; currency: string; status: string; payerEmail: string | null; createdAt: string }
 
 const starterBrands: Brand[] = [
   { name: 'PayPal', keyword: 'PAYPAL', color: '#003087', description: 'The safer, simpler way to pay online.', price: '$12.00' },
@@ -108,6 +110,8 @@ export default function Page() {
   const [messages, setMessages] = useState<ChatMessage[]>([{ role: 'assistant', text: 'What should we explore today? I’ll weave a relevant partner into the answer without interrupting the conversation.' }])
   const [campaign, setCampaign] = useState({ name: '', keyword: '', budget: '5000', category: 'Business & finance', copy: '' })
   const { data: paidStatus, mutate: refreshPaidStatus } = useSWR<{ paidBrands?: string[] }>('/api/paypal/paid', fetcher, { revalidateOnFocus: false })
+  const { data: receiptStatus, mutate: refreshReceipts } = useSWR<{ receipts?: Receipt[] }>('/api/paypal/receipts', fetcher, { revalidateOnFocus: false })
+  const receipts = receiptStatus?.receipts ?? []
   const paidBrands = paidStatus?.paidBrands ?? []
   const isBrandPaid = (name: string) => paidBrands.some((paidBrand) => paidBrand.trim().toLowerCase() === name.trim().toLowerCase())
   const activeAdvertPaid = paid || isBrandPaid(activeBrand.name)
@@ -126,8 +130,9 @@ export default function Page() {
     }
     setPaid(true)
     setCheckoutOpen(false)
-    setView(returnedView === 'chat' || returnedView === 'campaigns' || returnedView === 'about' ? returnedView : 'publisher')
+    setView(returnedView === 'chat' || returnedView === 'campaigns' || returnedView === 'about' || returnedView === 'inbox' ? returnedView : 'publisher')
     void refreshPaidStatus()
+    void refreshReceipts()
     window.history.replaceState({}, document.title, window.location.pathname)
   }, [brands])
 
@@ -222,13 +227,15 @@ export default function Page() {
         <nav className="main-nav" aria-label="Primary navigation">
           <button className={view === 'publisher' ? 'nav-item active' : 'nav-item'} onClick={() => setView('publisher')}><FileText /> Publisher</button>
           <button className={view === 'chat' ? 'nav-item active' : 'nav-item'} onClick={() => setView('chat')}><Bot /> AI surfaces</button>
-          <button className={view === 'campaigns' ? 'nav-item active' : 'nav-item'} onClick={() => setView('campaigns')}><BarChart3 /> Campaigns</button><button className={view === 'about' ? 'nav-item active' : 'nav-item'} onClick={() => setView('about')}><CircleHelp /> About us</button>
+          <button className={view === 'campaigns' ? 'nav-item active' : 'nav-item'} onClick={() => setView('campaigns')}><BarChart3 /> Campaigns</button><button className={view === 'inbox' ? 'nav-item active' : 'nav-item'} onClick={() => setView('inbox')}><Mail /> Receipts</button><button className={view === 'about' ? 'nav-item active' : 'nav-item'} onClick={() => setView('about')}><CircleHelp /> About us</button>
         </nav>
         <div className="top-actions"><button className="icon-button" aria-label="Help"><CircleHelp /></button>{session ? <button className="account-link" onClick={async () => { await signOut(); window.location.reload() }}>Sign out</button> : <a className="account-link" href="/sign-in?next=/">Sign in</a>}<div className="avatar">{session?.user?.name?.slice(0, 2).toUpperCase() || 'JD'}</div></div>
       </header>
 
       <div className="sandbox-banner"><span className="sandbox-badge">SANDBOX: no real money</span><span>Sponsored structure is deterministic and verified before it is shown.</span></div>
-      <div className="mobile-nav"><button onClick={() => setMobileMenuOpen((open) => !open)} aria-expanded={mobileMenuOpen}><Menu /> Menu</button><span>{view === 'publisher' ? 'Publisher view' : view === 'chat' ? 'AI surfaces' : view === 'campaigns' ? 'Campaigns' : 'About us'}</span><button aria-label="Search"><Search /></button></div>{mobileMenuOpen && <nav className="mobile-menu" aria-label="Mobile navigation"><button onClick={() => { setView('publisher'); setMobileMenuOpen(false) }} className={view === 'publisher' ? 'active' : ''}>Publisher</button><button onClick={() => { setView('chat'); setMobileMenuOpen(false) }} className={view === 'chat' ? 'active' : ''}>AI surfaces</button><button onClick={() => { setView('campaigns'); setMobileMenuOpen(false) }} className={view === 'campaigns' ? 'active' : ''}>Campaigns</button><button onClick={() => { setView('about'); setMobileMenuOpen(false) }} className={view === 'about' ? 'active' : ''}>About us</button></nav>}
+      <div className="mobile-nav"><button onClick={() => setMobileMenuOpen((open) => !open)} aria-expanded={mobileMenuOpen}><Menu /> Menu</button><span>{view === 'publisher' ? 'Publisher view' : view === 'chat' ? 'AI surfaces' : view === 'campaigns' ? 'Campaigns' : view === 'inbox' ? 'Receipts' : 'About us'}</span><button aria-label="Search"><Search /></button></div>{mobileMenuOpen && <nav className="mobile-menu" aria-label="Mobile navigation"><button onClick={() => { setView('publisher'); setMobileMenuOpen(false) }} className={view === 'publisher' ? 'active' : ''}>Publisher</button><button onClick={() => { setView('chat'); setMobileMenuOpen(false) }} className={view === 'chat' ? 'active' : ''}>AI surfaces</button><button onClick={() => { setView('campaigns'); setMobileMenuOpen(false) }} className={view === 'campaigns' ? 'active' : ''}>Campaigns</button><button onClick={() => { setView('inbox'); setMobileMenuOpen(false) }} className={view === 'inbox' ? 'active' : ''}>Receipts</button><button onClick={() => { setView('about'); setMobileMenuOpen(false) }} className={view === 'about' ? 'active' : ''}>About us</button></nav>}
+
+      {view === 'inbox' && <section className="workspace receipt-workspace"><div className="page-heading"><div><p className="eyebrow">Email inbox <span>PAYPAL RECEIPTS</span></p><h1>Your receipts, with the advert included.</h1><p className="lede">Every completed Acrostic placement arrives here as a clear PayPal payment receipt, followed by the sponsored message you purchased.</p></div><div className="heading-meta"><span className="status-pill"><Mail /> {receipts.length} receipt{receipts.length === 1 ? '' : 's'}</span></div></div><div className="receipt-list">{receipts.length === 0 ? <div className="empty-inbox"><Mail /><h2>No receipts yet</h2><p>Complete a paid Acrostic advert and your PayPal receipt will appear here automatically.</p><button className="primary-button" onClick={() => setView('publisher')}>Browse adverts <ArrowUpRight /></button></div> : receipts.map((receipt) => <article className="full-receipt" key={receipt.id}><div className="receipt-header"><div><span className="tiny-label">PAYPAL SANDBOX RECEIPT</span><h2>Payment completed</h2><p>{new Date(receipt.createdAt).toLocaleString()}</p></div><div className="receipt-paid"><Check /> PAID</div></div><div className="receipt-detail-grid"><div><span>Merchant</span><strong>Acrostic contextual commerce</strong></div><div><span>Payment method</span><strong>PayPal Sandbox</strong></div><div><span>Order reference</span><strong>{receipt.paypalOrderId}</strong></div><div><span>Billing email</span><strong>{receipt.payerEmail || 'PayPal buyer account'}</strong></div></div><div className="receipt-total"><div><span>Subtotal</span><span>Tax</span><b>Total paid</b></div><div><span>{receipt.currency} {receipt.subtotal || receipt.amount}</span><span>{receipt.currency} {receipt.tax || '0.00'}</span><strong>{receipt.currency} {receipt.amount}</strong></div></div><div className="receipt-advert"><div className="receipt-advert-mark" style={{ background: brands.find((brand) => brand.name === receipt.brandName)?.color || '#003087' }}>{receipt.keyword[0]}</div><div><span className="tiny-label">ACROSTIC ADVERT</span><h3>{receipt.brandName} · {receipt.keyword}</h3><p>{rewriteSentence(articleSentences[0], receipt.keyword[0])}</p></div></div></article>)}</div></section>}
 
       {view === 'publisher' && <section className="workspace publisher-workspace">
         <div className="page-heading"><div><p className="eyebrow">Publisher preview <span>LIVE</span></p><h1>Make every word work harder.</h1><p className="lede">See how Acrostic delivers relevant partner messages inside content your audience already trusts.</p></div><div className="heading-meta"><span className="status-pill"><Radio /> Serving preview traffic</span><span className="muted-label">Last synced just now</span></div></div>

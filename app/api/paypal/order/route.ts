@@ -15,6 +15,9 @@ export async function POST(request: Request) {
   const requestedBrand = typeof body?.brand === 'string' ? body.brand.trim().slice(0, 80) : 'PayPal'
   const item = CATALOG[requestedBrand as keyof typeof CATALOG] ?? { name: `${requestedBrand || 'Partner'} contextual placement`, value: '16.00' }
   const keyword = typeof body?.keyword === 'string' ? body.keyword.toUpperCase().replace(/[^A-Z]/g, '').slice(0, 20) : 'PAYPAL'
+  const subtotal = Math.max(1, keyword.length) * 100
+  const tax = Number((subtotal * 0.0825).toFixed(2))
+  const total = Number((subtotal + tax).toFixed(2))
   const returnView = body?.view === 'chat' || body?.view === 'campaigns' || body?.view === 'about' ? body.view : 'publisher'
   const token = await getPayPalToken()
   const origin = await getOrigin()
@@ -31,7 +34,7 @@ export async function POST(request: Request) {
     headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json', 'PayPal-Request-Id': crypto.randomUUID() },
     body: JSON.stringify({
       intent: 'CAPTURE',
-      purchase_units: [{ custom_id: keyword, description: item.name, amount: { currency_code: 'USD', value: item.value } }],
+      purchase_units: [{ custom_id: keyword, description: item.name, amount: { currency_code: 'USD', value: total.toFixed(2), breakdown: { item_total: { currency_code: 'USD', value: subtotal.toFixed(2) }, tax_total: { currency_code: 'USD', value: tax.toFixed(2) } } } }],
       application_context: { user_action: 'PAY_NOW', shipping_preference: 'NO_SHIPPING', return_url: returnUrl.toString(), cancel_url: cancelUrl.toString() },
     }),
   })
