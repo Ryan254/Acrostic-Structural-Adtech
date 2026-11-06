@@ -50,6 +50,13 @@ button { cursor: pointer; }
 .receipt-header p { margin: 0; color: #77837e; font-size: 12px; }
 .receipt-paid { display: inline-flex; height: 30px; align-items: center; gap: 6px; padding: 0 10px; border-radius: 999px; background: #e1f4e7; color: #187044; font-size: 11px; font-weight: 800; letter-spacing: .08em; }
 .receipt-paid svg { width: 14px; height: 14px; }
+.receipt-header-actions { display: grid; justify-items: end; gap: 10px; }
+.receipt-delete { border: 0; padding: 0; background: transparent; color: #9b5147; cursor: pointer; font-size: 11px; font-weight: 700; }
+.receipt-delete:hover { color: #6f2d29; text-decoration: underline; }
+.receipt-acrostic-lines { display: grid; gap: 8px; margin-top: 12px; }
+.receipt-acrostic-line { padding: 0; border: 0; color: #425955; font-size: 13px; line-height: 1.5; }
+.receipt-acrostic-line span { display: block; }
+.receipt-advert-copy { min-width: 0; flex: 1; }
 .receipt-detail-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; padding: 22px 0; }
 .receipt-detail-grid div { display: grid; gap: 5px; }
 .receipt-detail-grid span { color: #7b8882; font-size: 11px; }
