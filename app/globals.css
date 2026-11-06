@@ -95,12 +95,8 @@ button { cursor: pointer; }
 .receipt-offer b { color: #12343b; letter-spacing: .08em; font-size: 13px; }
 .receipt-offer p { margin: 0; color: #65736f; font-size: 10px; }
 .paragraph-acrostic-block { margin-top: 20px; display: grid; gap: 4px; }
- .paragraph-acrostic-block p { display: flex; align-items: flex-start; gap: 2px; margin: 0; line-height: 1.55; }
- .paragraph-acrostic-letter { flex: 0 0 26px; width: 26px; height: auto; display: inline-flex; align-items: flex-start; justify-content: flex-start; padding-top: 1px; background: transparent; color: var(--tile-color); font: 700 26px/.98 -apple-system, BlinkMacSystemFont, 'SF Pro Display', Arial, sans-serif; text-shadow: 0 2px 8px color-mix(in srgb, var(--tile-color) 24%, transparent); animation: paragraph-acrostic-rise 2.8s ease-in-out infinite; }
- .paragraph-acrostic-block p:nth-child(2n) .paragraph-acrostic-letter { animation-delay: .18s; }
- .paragraph-acrostic-block p:nth-child(3n) .paragraph-acrostic-letter { animation-delay: .36s; }
- @keyframes paragraph-acrostic-rise { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-4px); } }
- .chat-acrostic .acrostic-line > span:last-child { min-width: max-content; }
+.paragraph-acrostic-block p { display: flex; align-items: flex-start; gap: 10px; margin: 0; line-height: 1.55; }
+.paragraph-acrostic-letter { flex: 0 0 58px; width: 58px; height: 58px; display: inline-flex; align-items: center; justify-content: center; border-radius: 6px; background: color-mix(in srgb, var(--tile-color) 84%, #12343b); color: #f4d69a; font: 700 42px/.9 Georgia, 'Times New Roman', serif; box-shadow: 0 4px 12px rgba(24, 46, 48, .18); }.chat-acrostic .acrostic-line > span:last-child { min-width: max-content; }
 .ai-thinking { display: inline-flex; align-items: center; gap: 10px; color: #667770; font-size: 13px; font-style: italic; }
 .thinking-dots { display: inline-flex; gap: 4px; align-items: center; }
 .thinking-dots i { width: 5px; height: 5px; border-radius: 50%; background: #2d6b59; animation: thinking-pulse 1.2s ease-in-out infinite; }
