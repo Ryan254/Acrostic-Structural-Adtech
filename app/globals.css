@@ -54,9 +54,13 @@ button { cursor: pointer; }
 .receipt-delete { border: 0; padding: 0; background: transparent; color: #9b5147; cursor: pointer; font-size: 11px; font-weight: 700; }
 .receipt-delete:hover { color: #6f2d29; text-decoration: underline; }
 .receipt-acrostic-lines { display: grid; gap: 8px; margin-top: 12px; }
-.receipt-acrostic-line { padding: 0; border: 0; color: #425955; font-size: 13px; line-height: 1.5; }
+.receipt-acrostic-line { display: grid; grid-template-columns: 20px 1fr; gap: 8px; padding: 7px 0; border-top: 1px solid #e1e8e0; color: #425955; font-size: 13px; line-height: 1.5; }
+.receipt-acrostic-line b { color: #12343b; font-size: 15px; font-weight: 900; }
 .receipt-acrostic-line span { display: block; }
 .receipt-advert-copy { min-width: 0; flex: 1; }
+.acrostic-word { display: flex; gap: 5px; margin: 8px 0 10px; color: #12343b; font-size: 26px; font-weight: 900; letter-spacing: .14em; line-height: 1; }
+.acrostic-word span { display: inline-block; animation: acrostic-letter-rise 2.4s ease-in-out infinite; }
+@keyframes acrostic-letter-rise { 0%, 100% { transform: translateY(0); color: #12343b; } 50% { transform: translateY(-4px); color: #003087; } }
 .receipt-detail-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; padding: 22px 0; }
 .receipt-detail-grid div { display: grid; gap: 5px; }
 .receipt-detail-grid span { color: #7b8882; font-size: 11px; }
