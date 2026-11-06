@@ -30,3 +30,15 @@ export async function GET() {
 
   return NextResponse.json({ receipts })
 }
+
+export async function DELETE(request: Request) {
+  const session = await auth.api.getSession({ headers: await headers() })
+  if (!session?.user) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+
+  const body = await request.json().catch(() => null)
+  const receiptId = typeof body?.id === 'string' ? body.id : ''
+  if (!receiptId) return NextResponse.json({ error: 'Receipt id is required' }, { status: 400 })
+
+  await db.delete(paypalReceipt).where(and(eq(paypalReceipt.id, receiptId), eq(paypalReceipt.userId, session.user.id)))
+  return NextResponse.json({ ok: true })
+}
