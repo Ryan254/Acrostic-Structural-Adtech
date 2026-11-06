@@ -54,8 +54,11 @@ button { cursor: pointer; }
 .receipt-delete { border: 0; padding: 0; background: transparent; color: #9b5147; cursor: pointer; font-size: 11px; font-weight: 700; }
 .receipt-delete:hover { color: #6f2d29; text-decoration: underline; }
 .receipt-acrostic-lines { display: grid; gap: 8px; margin-top: 12px; }
-.receipt-acrostic-line { display: grid; grid-template-columns: 20px 1fr; gap: 8px; padding: 7px 0; border-top: 1px solid #e1e8e0; color: #425955; font-size: 13px; line-height: 1.5; }
-.receipt-acrostic-line b { color: #12343b; font-size: 15px; font-weight: 900; }
+.receipt-acrostic-line { display: grid; grid-template-columns: 17px 1fr; gap: 3px; padding: 5px 0; border-top: 1px solid #e1e8e0; color: #425955; font-size: 13px; line-height: 1.5; }
+.receipt-acrostic-line b { color: #12343b; font-size: 19px; font-weight: 900; line-height: 1.1; animation: receipt-acrostic-letter-rise 2.4s ease-in-out infinite; }
+.receipt-acrostic-line:nth-child(2n) b { animation-delay: .12s; }
+.receipt-acrostic-line:nth-child(3n) b { animation-delay: .24s; }
+@keyframes receipt-acrostic-letter-rise { 0%, 100% { transform: translateY(0); color: #12343b; } 50% { transform: translateY(-3px); color: #003087; } }
 .receipt-acrostic-line span { display: block; }
 .receipt-advert-copy { min-width: 0; flex: 1; }
 .acrostic-word { display: flex; gap: 5px; margin: 8px 0 10px; color: #12343b; font-size: 26px; font-weight: 900; letter-spacing: .14em; line-height: 1; }
@@ -77,8 +80,6 @@ button { cursor: pointer; }
 .receipt-advert-mark { display: grid; width: 44px; height: 44px; flex: 0 0 44px; place-items: center; border-radius: 10px; color: #fff; font-size: 22px; font-weight: 800; }
 .receipt-advert h3 { margin: 5px 0 3px; color: #12343b; font-size: 17px; }
 .receipt-advert p { margin: 0 0 12px; color: #6a7774; font-size: 12px; }
-.receipt-acrostic-line { display: flex; gap: 9px; padding: 7px 0; border-top: 1px solid #e1e8e0; color: #50635f; font-size: 12px; line-height: 1.45; }
-.receipt-acrostic-line b { color: #003087; }
 @media (max-width: 640px) { .full-receipt { padding: 20px; } .receipt-header { display: grid; } .receipt-detail-grid { grid-template-columns: 1fr; gap: 12px; } .receipt-advert { padding: 14px; } }
 .receipt-card { padding: 12px; border: 1px solid #e0e5df; border-radius: 12px; background: rgba(255,255,255,.72); }
 .receipt-card + .receipt-card { margin-top: 10px; }
