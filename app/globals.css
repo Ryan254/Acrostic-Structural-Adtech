@@ -34,6 +34,32 @@ button { cursor: pointer; }
   .chat-acrostic .acrostic-line > span:last-child { overflow-wrap: anywhere; }
   .message-bubble { min-width: 0; }.chat-acrostic { overflow-x: auto; overflow-y: hidden; scrollbar-width: thin; }.chat-acrostic .acrostic-line { display: flex; flex-wrap: nowrap; align-items: center; gap: 2px; white-space: nowrap; overflow: visible; width: max-content; min-width: 100%; }
 .publisher-continuation-intro { margin-top: 28px; }
+.aye-page > .page-heading h1 { font-size: 34px; }
+.aye-page > .metric-grid, .aye-page > .campaign-grid { display: none; }
+.aye-page .primary-action { display: none; }
+.aye-panel { margin: 24px 0; padding: 24px; border: 1px solid #cbd8d0; border-radius: 20px; background: linear-gradient(135deg, #f4f8f2, #fffaf0); }
+.aye-intro { max-width: 720px; }
+.aye-intro h2 { margin: 5px 0 8px; color: #12343b; font-size: 25px; letter-spacing: -.03em; }
+.aye-intro > p:last-child { margin: 0; color: #65736f; line-height: 1.55; }
+.aye-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; margin-top: 20px; }
+.aye-card { display: grid; gap: 5px; padding: 17px; border: 1px solid #d8e2db; border-radius: 14px; background: rgba(255,255,255,.78); }
+.aye-card > strong { color: #12343b; font-size: 30px; letter-spacing: -.04em; }
+.aye-card > span:not(.tiny-label) { color: #71807a; font-size: 12px; }
+.aye-actions { display: flex; gap: 8px; margin-top: 10px; }
+.aye-actions button { border: 1px solid #b8cbc0; border-radius: 8px; padding: 8px 10px; background: #fff; color: #12343b; cursor: pointer; font-size: 11px; font-weight: 700; }
+.aye-actions button:hover { border-color: #003087; color: #003087; }
+.aye-split { display: grid; gap: 8px; margin-top: 10px; color: #65736f; font-size: 11px; }
+.aye-split span { display: flex; justify-content: space-between; }
+.aye-split b { color: #167044; }
+.aye-inspector { grid-column: span 2; }
+.aye-inspector-head { display: flex; justify-content: space-between; }
+.aye-inspector-head i { color: #167044; font-size: 10px; font-style: normal; font-weight: 800; }
+.aye-terminal { display: grid; gap: 7px; min-height: 100px; margin-top: 5px; padding: 13px; border-radius: 10px; background: #112c31; color: #a9e7c4; overflow: auto; }
+.aye-terminal code { font: 11px/1.4 'Geist Mono', monospace; }
+.aye-math { display: flex; flex-wrap: wrap; gap: 8px 18px; margin-top: 14px; color: #65736f; font-size: 11px; }
+.aye-math b { color: #12343b; }
+.aye-math span { max-width: 560px; }
+@media (max-width: 700px) { .aye-grid { grid-template-columns: 1fr; } .aye-inspector { grid-column: auto; } }
 .receipt-inbox { margin-top: 16px; padding: 18px; border: 1px solid #d9e0da; border-radius: 16px; background: linear-gradient(145deg, #fffdf7, #f4f7f1); box-shadow: 0 10px 24px rgba(24, 46, 48, .08); }
 .receipt-inbox-heading { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; margin-bottom: 14px; }
 .receipt-inbox-heading h3 { margin: 4px 0 0; font-size: 18px; letter-spacing: -.02em; }
