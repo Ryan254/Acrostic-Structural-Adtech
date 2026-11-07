@@ -34,6 +34,7 @@ button { cursor: pointer; }
   .chat-acrostic .acrostic-line > span:last-child { overflow-wrap: anywhere; }
   .message-bubble { min-width: 0; }.chat-acrostic { overflow-x: auto; overflow-y: hidden; scrollbar-width: thin; }.chat-acrostic .acrostic-line { display: flex; flex-wrap: nowrap; align-items: center; gap: 2px; white-space: nowrap; overflow: visible; width: max-content; min-width: 100%; }
 .publisher-continuation-intro { margin-top: 28px; }
+.campaign-workspace .aye-panel { display: none; }
 .aye-page > .page-heading h1 { font-size: 34px; }
 .aye-page > .metric-grid, .aye-page > .campaign-grid { display: none; }
 .aye-page .primary-action { display: none; }
