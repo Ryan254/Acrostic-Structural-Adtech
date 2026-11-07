@@ -37,6 +37,9 @@ button { cursor: pointer; }
 .aye-page > .page-heading h1 { font-size: 34px; }
 .aye-page > .metric-grid, .aye-page > .campaign-grid { display: none; }
 .aye-page .primary-action { display: none; }
+.aye-proof-mini { margin-bottom: 14px; padding: 13px; border: 1px solid #cbd8d0; border-radius: 13px; background: #f4f8f2; }
+.aye-proof-mini .aye-terminal { min-height: 0; margin-top: 8px; padding: 10px; }
+.aye-proof-mini .aye-terminal code { font-size: 10px; }
 .aye-panel { margin: 24px 0; padding: 24px; border: 1px solid #cbd8d0; border-radius: 20px; background: linear-gradient(135deg, #f4f8f2, #fffaf0); }
 .aye-intro { max-width: 720px; }
 .aye-intro h2 { margin: 5px 0 8px; color: #12343b; font-size: 25px; letter-spacing: -.03em; }
