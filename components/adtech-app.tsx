@@ -101,8 +101,8 @@ function AcrosticLine({ sentence, letter, highlight, showBadge = true, color }: 
 }
 
 function AyeProofWidget({ logs }: { logs: string[] }) {
-  return <section className="aye-proof-mini" aria-label="AYE API proof inspector"><div className="aye-inspector-head"><span className="tiny-label">AYE API PROOF</span><i>LIVE</i></div><div className="aye-terminal">{logs.slice(0, 3).map((log, index) => <code key={`${log}-${index}`}>{`> ${log}`}</code>)}</div></section>
-}
+  return <section className="aye-proof-mini" aria-label="AYE API proof inspector"><div className="aye-inspector-head"><span className="tiny-label">AYE API PROOF</span><i>LIVE</i></div><time className="aye-proof-time">{new Date().toLocaleString()}</time><div className="aye-terminal">{logs.slice(0, 3).map((log, index) => <code key={`${log}-${index}`}>{`> ${log}`}</code>)}</div></section>
+  }
 
 export default function Page() {
   const { data: session } = useSWR<{ user?: { name?: string } } | null>('/api/auth/get-session', (url) => fetch(url, { credentials: 'include' }).then((response) => response.json()), { revalidateOnFocus: false })
@@ -136,21 +136,22 @@ export default function Page() {
   const activeAdvertPaid = paid || isBrandPaid(activeBrand.name)
 
   async function triggerAyeSettlement(tier: 'impression' | 'engagement') {
+  const eventTime = new Date().toLocaleString()
   const gross = tier === 'impression' ? 0.5 : 5
   const publisherShare = gross * 0.8
   if (ayeVault < gross) {
     setPaid(false)
-    setAyeLogs((logs) => [`Vault depleted · payment required for ${keyword}`, ...logs].slice(0, 6))
+    setAyeLogs((logs) => [`${eventTime} · Vault depleted · payment required for ${keyword}`, ...logs].slice(0, 6))
     return
   }
   const response = await fetch('/api/aye/settle', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ tier, keyword }) })
   if (!response.ok) {
-    setAyeLogs((logs) => [`PayPal payout pending · ${tier} settlement could not be completed`, ...logs].slice(0, 6))
+    setAyeLogs((logs) => [`${eventTime} · PayPal payout pending · ${tier} settlement could not be completed`, ...logs].slice(0, 6))
     return
   }
   setAyeVault((balance) => Number((balance - gross).toFixed(2)))
   setPublisherWallet((balance) => Number((balance + publisherShare).toFixed(2)))
-  setAyeLogs((logs) => [`POST /v1/payments/payouts · 201 Created · ${tier} · $${publisherShare.toFixed(2)} publisher`, ...logs].slice(0, 6))
+  setAyeLogs((logs) => [`${eventTime} · POST /v1/payments/payouts · 201 Created · ${tier} · $${publisherShare.toFixed(2)} publisher`, ...logs].slice(0, 6))
   }
 
   useEffect(() => {
