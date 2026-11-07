@@ -4,7 +4,7 @@ import { NextResponse } from 'next/server'
 
 const MODEL = google('gemini-3.5-flash')
 
-const leadIns = ['People may note that', 'A useful way to understand this is that', 'You can see this in practice:', 'Practical context shows that', 'Another way to view this is that', 'Learning about this reveals that']
+const contextualOpeners: Record<string, string> = { A: 'As the context shows,', B: 'Broadly speaking,', C: 'Clearly,', D: 'Depending on the details,', E: 'Even so,', F: 'For context,', G: 'Generally,', H: 'However,', I: 'In practice,', J: 'Just as importantly,', K: 'Keeping that in mind,', L: 'Likewise,', M: 'More specifically,', N: 'Notably,', O: 'Overall,', P: 'Practically speaking,', Q: 'Quite often,', R: 'Relatedly,', S: 'Similarly,', T: 'Taken together,', U: 'Ultimately,', V: 'Viewed this way,', W: 'When considered together,', X: 'X-factor considerations include', Y: 'Yet,', Z: 'Zooming out,' }
 
 function normalizeLines(text: string, keyword: string) {
   const rawLines = text
@@ -20,8 +20,8 @@ function normalizeLines(text: string, keyword: string) {
     const cleanSentence = sentence.replace(/^[A-Z](?:\s+|[:.\-—]\s*)/i, '').trim()
     const firstWord = cleanSentence.match(/^[A-Za-z]+/)?.[0] ?? ''
     if (firstWord.toUpperCase().startsWith(letter)) return cleanSentence
-    const continuation = `${leadIns[index % leadIns.length]} ${cleanSentence.charAt(0).toLowerCase()}${cleanSentence.slice(1)}`
-    return `${letter} ${continuation}`
+    const opener = contextualOpeners[letter] || 'In this context,'
+    return `${opener} ${cleanSentence.charAt(0).toLowerCase()}${cleanSentence.slice(1)}`
   })
 }
 

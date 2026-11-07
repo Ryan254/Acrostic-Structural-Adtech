@@ -32,7 +32,7 @@ button { cursor: pointer; }
   .chat-acrostic-label b { color: #71817b; letter-spacing: .18em; }
   .chat-acrostic .acrostic-line { margin: 0; min-width: 0; }
   .chat-acrostic .acrostic-line > span:last-child { overflow-wrap: anywhere; }
-  .message-bubble { min-width: 0; }.chat-acrostic { overflow-x: auto; overflow-y: hidden; scrollbar-width: thin; }.chat-acrostic .acrostic-line { display: flex; flex-wrap: nowrap; align-items: center; gap: 2px; white-space: nowrap; overflow: visible; width: max-content; min-width: 100%; }
+  .message-bubble { min-width: 0; }.chat-acrostic { width: 100%; max-width: 100%; overflow-x: hidden; overflow-y: visible; }.chat-acrostic .acrostic-line { display: flex; flex-wrap: wrap; align-items: flex-start; gap: 2px; white-space: normal; overflow-wrap: anywhere; width: 100%; min-width: 0; }
 .publisher-continuation-intro { margin-top: 28px; }
 .campaign-workspace .aye-panel { display: none; }
 .aye-page > .page-heading h1 { font-size: 34px; }
@@ -87,8 +87,8 @@ button { cursor: pointer; }
 .receipt-header-actions { display: grid; justify-items: end; gap: 10px; }
 .receipt-delete { border: 0; padding: 0; background: transparent; color: #9b5147; cursor: pointer; font-size: 11px; font-weight: 700; }
 .receipt-delete:hover { color: #6f2d29; text-decoration: underline; }
-.receipt-acrostic-lines { display: grid; gap: 8px; margin-top: 12px; }
-.receipt-acrostic-line { display: grid; grid-template-columns: 17px 1fr; gap: 3px; padding: 5px 0; border-top: 1px solid #e1e8e0; color: #425955; font-size: 13px; line-height: 1.5; }
+.receipt-acrostic-lines { display: grid; gap: 3px; margin-top: 8px; }
+.receipt-acrostic-line { display: grid; grid-template-columns: 17px 1fr; gap: 2px; padding: 4px 0; border-top: 1px solid #e1e8e0; color: #425955; font-size: 13px; line-height: 1.5; }
 .receipt-acrostic-line b { color: #12343b; font-size: 19px; font-weight: 900; line-height: 1.1; animation: receipt-acrostic-letter-rise 2.4s ease-in-out infinite; }
 .receipt-acrostic-line:nth-child(2n) b { animation-delay: .12s; }
 .receipt-acrostic-line:nth-child(3n) b { animation-delay: .24s; }
