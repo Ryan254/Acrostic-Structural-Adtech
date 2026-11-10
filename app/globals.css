@@ -92,6 +92,9 @@ button { cursor: pointer; }
 .receipt-acrostic-line b { color: #12343b; font-size: 19px; font-weight: 900; line-height: 1.1; animation: receipt-acrostic-letter-rise 2.4s ease-in-out infinite; }
 .receipt-acrostic-line:nth-child(2n) b { animation-delay: .12s; }
 .receipt-acrostic-line:nth-child(3n) b { animation-delay: .24s; }
+@keyframes paypal-checkout-attention { 0%, 100% { transform: translateY(0); box-shadow: 0 5px 14px rgba(0, 48, 135, .16); } 50% { transform: translateY(-2px); box-shadow: 0 9px 22px rgba(0, 48, 135, .28), 0 0 0 4px rgba(0, 48, 135, .08); } }
+.publisher-workspace .checkout-button { animation: paypal-checkout-attention 2.2s ease-in-out infinite; }
+.publisher-workspace .checkout-button:hover, .publisher-workspace .checkout-button:focus-visible { animation-play-state: paused; transform: translateY(-2px); }
 @keyframes receipt-acrostic-letter-rise { 0%, 100% { transform: translateY(0); color: #12343b; } 50% { transform: translateY(-3px); color: #003087; } }
 .receipt-acrostic-line span { display: block; }
 .receipt-advert-copy { min-width: 0; flex: 1; }
