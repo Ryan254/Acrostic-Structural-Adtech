@@ -32,7 +32,7 @@ button { cursor: pointer; }
   .chat-acrostic-label b { color: #71817b; letter-spacing: .18em; }
   .chat-acrostic .acrostic-line { margin: 0; min-width: 0; }
   .chat-acrostic .acrostic-line > span:last-child { overflow-wrap: normal; }
-  .message-bubble { min-width: 0; }.chat-acrostic { width: 100%; max-width: 100%; max-height: 380px; overflow-x: auto; overflow-y: hidden; scrollbar-width: thin; }.chat-acrostic .acrostic-line { display: grid; grid-template-columns: 18px max-content; align-items: flex-start; gap: 0; margin: 0; padding: 0; white-space: nowrap; width: max-content; min-width: 100%; line-height: 1.15; }.chat-acrostic .acrostic-line + .acrostic-line { margin-top: -3px; }.chat-acrostic .acrostic-line > span { margin: 0; }
+  .message-bubble { min-width: 0; }.chat-acrostic { width: 100%; max-width: 100%; max-height: 380px; overflow-x: auto; overflow-y: hidden; scrollbar-width: thin; }.chat-acrostic .acrostic-line { display: grid; grid-template-columns: 22px max-content; align-items: flex-start; gap: 0; margin: 0; padding: 0; white-space: nowrap; width: max-content; min-width: 100%; line-height: 1.15; }.chat-acrostic .acrostic-line + .acrostic-line { margin-top: -3px; }.chat-acrostic .acrostic-line > span { margin: 0; }.chat-acrostic .letter-badge { width: 25px; height: 25px; font-size: 18px; margin-top: 0; }
 .publisher-continuation-intro { margin-top: 28px; }
 .campaign-workspace .aye-panel { display: none; }
 .aye-page > .page-heading h1 { font-size: 34px; }
@@ -92,6 +92,12 @@ button { cursor: pointer; }
 .receipt-acrostic-line b { color: #12343b; font-size: 19px; font-weight: 900; line-height: 1.1; animation: receipt-acrostic-letter-rise 2.4s ease-in-out infinite; }
 .receipt-acrostic-line:nth-child(2n) b { animation-delay: .12s; }
 .receipt-acrostic-line:nth-child(3n) b { animation-delay: .24s; }
+@keyframes paypal-checkout-attention { 0%, 100% { transform: translateY(0); box-shadow: 0 5px 14px rgba(0, 48, 135, .16); } 50% { transform: translateY(-2px); box-shadow: 0 9px 22px rgba(0, 48, 135, .28), 0 0 0 4px rgba(0, 48, 135, .08); } }
+.publisher-workspace .checkout-button { position: relative; z-index: 0; isolation: isolate; animation: paypal-checkout-attention 2.2s ease-in-out infinite; }
+.publisher-workspace .checkout-button::before { content: ''; position: absolute; z-index: -1; inset: -3px; border-radius: inherit; background: linear-gradient(115deg, #ef4444, #f59e0b, #22c55e, #06b6d4, #6366f1, #ec4899, #ef4444); background-size: 300% 300%; filter: blur(7px); opacity: .8; animation: rainbow-checkout-glow 4s linear infinite; }
+.publisher-workspace .checkout-button:hover::before, .publisher-workspace .checkout-button:focus-visible::before { opacity: 1; }
+.publisher-workspace .checkout-button:hover, .publisher-workspace .checkout-button:focus-visible { animation-play-state: paused; transform: translateY(-2px); }
+@keyframes rainbow-checkout-glow { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
 @keyframes receipt-acrostic-letter-rise { 0%, 100% { transform: translateY(0); color: #12343b; } 50% { transform: translateY(-3px); color: #003087; } }
 .receipt-acrostic-line span { display: block; }
 .receipt-advert-copy { min-width: 0; flex: 1; }
