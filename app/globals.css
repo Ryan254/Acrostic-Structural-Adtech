@@ -31,8 +31,8 @@ button { cursor: pointer; }
   .chat-acrostic-label { display: flex; justify-content: space-between; gap: 14px; color: #126f67; font-size: 10px; font-weight: 900; letter-spacing: .14em; }
   .chat-acrostic-label b { color: #71817b; letter-spacing: .18em; }
   .chat-acrostic .acrostic-line { margin: 0; min-width: 0; }
-  .chat-acrostic .acrostic-line > span:last-child { overflow-wrap: anywhere; }
-  .message-bubble { min-width: 0; }.chat-acrostic { width: 100%; max-width: 100%; max-height: 380px; overflow-x: hidden; overflow-y: auto; scrollbar-width: thin; }.chat-acrostic .acrostic-line { display: grid; grid-template-columns: 18px minmax(0, 1fr); align-items: start; gap: 0; margin: 0; padding: 0; white-space: normal; overflow-wrap: anywhere; width: 100%; min-width: 0; line-height: 1.35; }
+  .chat-acrostic .acrostic-line > span:last-child { overflow-wrap: normal; }
+  .message-bubble { min-width: 0; }.chat-acrostic { width: 100%; max-width: 100%; max-height: 380px; overflow-x: auto; overflow-y: hidden; scrollbar-width: thin; }.chat-acrostic .acrostic-line { display: grid; grid-template-columns: 18px max-content; align-items: flex-start; gap: 0; margin: 0; padding: 0; white-space: nowrap; width: max-content; min-width: 100%; line-height: 1.2; }
 .publisher-continuation-intro { margin-top: 28px; }
 .campaign-workspace .aye-panel { display: none; }
 .aye-page > .page-heading h1 { font-size: 34px; }
